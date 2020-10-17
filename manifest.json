@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+
+  "name": "SalesSaver Plugin",
+  "description": "This extension will provide a easy way to keep track of shopping carts online.",
+  "version": "1.0",
+
+  "browser_action": {
+   "default_icon": "icon.png",
+   "default_popup": "extension.html"
+  },
+  "permissions": [
+   "activeTab"
+   ]
+}
