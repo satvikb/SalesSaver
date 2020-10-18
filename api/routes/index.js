@@ -1,7 +1,7 @@
 var express = require("express");
-var request = require('request');
-const fs = require('fs');
-var path = require('path');
+var request = require("request");
+const fs = require("fs");
+var path = require("path");
 const { randomInt } = require("crypto");
 var router = express.Router();
 
@@ -17,92 +17,152 @@ var router = express.Router();
 //   return itemId != e.itemID
 // });
 
-var storeIDs = [100, 200, 300]
-var storeNames = ["Burdell's Boutique", "Not Publix", "S3"]
-var itemNames = ["White Scarf", "Pink Dress", "Blue Necklace", "Sapphire Pearl", "Diamong Ring", "Milk", "Eggs", "Cheese", "Tortillas", "Ketchup", "Black Dress Shoes", "White Sneakers", "Blue Sweatpants", "Roses", "14"]
-var url = "https://images.squarespace-cdn.com/content/v1/5105d89ee4b0869f6416d903/1561572439442-WJYDG53JMTL55N4JS8ZK/ke17ZwdGBToddI8pDm48kMtiXMEMZ8ID8MVhA-T_Qc9Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIXpy3a2Cibo6eml5BpILeGX-BY3QvcZT7F317PmmzovI/c3-hoodie-black-front.png"
+var storeIDs = [100, 200, 300];
+var storeNames = ["Burdell's Boutique", "Not Publix", "S3"];
+var itemNames = [
+  "White Scarf",
+  "Pink Dress",
+  "Blue Necklace",
+  "Sapphire Pearl",
+  "Diamong Ring",
+  "Milk",
+  "Eggs",
+  "Cheese",
+  "Tortillas",
+  "Ketchup",
+  "Black Dress Shoes",
+  "White Sneakers",
+  "Blue Sweatpants",
+  "Roses",
+  "14",
+];
+var url =
+  "https://images.squarespace-cdn.com/content/v1/5105d89ee4b0869f6416d903/1561572439442-WJYDG53JMTL55N4JS8ZK/ke17ZwdGBToddI8pDm48kMtiXMEMZ8ID8MVhA-T_Qc9Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIXpy3a2Cibo6eml5BpILeGX-BY3QvcZT7F317PmmzovI/c3-hoodie-black-front.png";
 
-var AllItemsAvailable = {}
+var AllItemsAvailable = {};
 
-let categoryrawdata = fs.readFileSync(path.resolve( __dirname, "./categories.json"));
-let itemtemplaterawdata = fs.readFileSync(path.resolve( __dirname, './itemtemplate.json'));
+let categoryrawdata = fs.readFileSync(
+  path.resolve(__dirname, "./categories.json")
+);
+let itemtemplaterawdata = fs.readFileSync(
+  path.resolve(__dirname, "./itemtemplate.json")
+);
 
-requestToNCRAPI("PUT", "catalog/2/category-nodes/2/", function(res){
-  console.log("Created categories")
-}, categoryrawdata)
+requestToNCRAPI(
+  "PUT",
+  "catalog/2/category-nodes/2/",
+  function (res) {
+    console.log("Created categories");
+  },
+  categoryrawdata
+);
 
-for(var i = 0; i < 3; i++){
-  var storeId = storeIDs[i]
+for (var i = 0; i < 3; i++) {
+  var storeId = storeIDs[i];
 
-  var items = []
-  for(var j = 0; j < 5; j++){
-    var itemId = (i*5)+j
-    var item = itemObject(itemId, itemNames[(i*5)+j], (getRandomInt(20)+10)-0.01, url, storeId, true)
-    var itemTemplateCopy = (' ' + itemtemplaterawdata).slice(1);
-    var itemTemplateObj = JSON.parse(itemTemplateCopy)
-    itemTemplateObj.packageIdentifiers[0].value = ""+itemId;
-    itemTemplateObj.longDescription.values[0].value = ""+item.itemName;
-    itemTemplateObj.shortDescription.values[0].value = ""+item.itemName;
+  var items = [];
+  for (var j = 0; j < 5; j++) {
+    var itemId = i * 5 + j;
+    var item = itemObject(
+      itemId,
+      itemNames[i * 5 + j],
+      getRandomInt(20) + 10 - 0.01,
+      url,
+      storeId,
+      true
+    );
+    var itemTemplateCopy = (" " + itemtemplaterawdata).slice(1);
+    var itemTemplateObj = JSON.parse(itemTemplateCopy);
+    itemTemplateObj.packageIdentifiers[0].value = "" + itemId;
+    itemTemplateObj.longDescription.values[0].value = "" + item.itemName;
+    itemTemplateObj.shortDescription.values[0].value = "" + item.itemName;
     // TODO merchandise category?
     // console.log(JSON.stringify(itemTemplateObj, null, 2))
-    requestToNCRAPI("PUT", "catalog/2/items/2/"+itemId, function(res){
-      // console.log("Created item "+JSON.stringify(res))
-    }, JSON.stringify(itemTemplateObj))
+    requestToNCRAPI(
+      "PUT",
+      "catalog/2/items/2/" + itemId,
+      function (res) {
+        // console.log("Created item "+JSON.stringify(res))
+      },
+      JSON.stringify(itemTemplateObj)
+    );
 
-    items.push(item)
+    items.push(item);
   }
 
-  AllItemsAvailable[storeId] = items
+  AllItemsAvailable[storeId] = items;
 }
 
-function getRandomExistingItem(){
-  return AllItemsAvailable[storeIDs[getRandomInt(3)]][getRandomInt(5)]
+function getRandomExistingItem() {
+  return AllItemsAvailable[storeIDs[getRandomInt(3)]][getRandomInt(5)];
 }
 
-function orderObject(orderId, items, deliveryDate, cartId){
-  return {"id": orderId, "items": items, "cartId": cartId, "deliveryDate":deliveryDate}
+function orderObject(orderId, items, deliveryDate, cartId) {
+  return {
+    id: orderId,
+    items: items,
+    cartId: cartId,
+    deliveryDate: deliveryDate,
+  };
 }
 
-function itemObject(itemId, name, price, pictureURL, cartId, isStocked){
-  return {"id": itemId, "itemName": name, "price": price, "pictureURL": pictureURL, "cartId": cartId, "isStocked":isStocked}
+function itemObject(itemId, name, price, pictureURL, cartId, isStocked) {
+  return {
+    id: itemId,
+    itemName: name,
+    price: price,
+    pictureURL: pictureURL,
+    cartId: cartId,
+    isStocked: isStocked,
+  };
 }
 
-function cartObject(cartId, items){
-  return {"id": cartId, "items":items}
+function cartObject(cartId, items) {
+  return { id: cartId, items: items };
 }
 
-function userObject(userId, carts, orders, promotions){
-  return {"id": userId, "carts": carts, "orders": orders, "promotions": promotions}
+function userObject(userId, carts, orders, promotions) {
+  return { id: userId, carts: carts, orders: orders, promotions: promotions };
 }
 
-function promotionObject(promotionId, cartId, description, expiryDate){
-  return {"id": promotionId, "cartId": cartId, "description": description, "expiryDate": expiryDate}
+function promotionObject(promotionId, cartId, description, expiryDate) {
+  return {
+    id: promotionId,
+    cartId: cartId,
+    description: description,
+    expiryDate: expiryDate,
+  };
 }
 
-
-var carts = {}
-for(var i = 0; i < 3; i++){
-  carts[storeIDs[i]] = cartObject(storeIDs[i], [])
+var carts = {};
+for (var i = 0; i < 3; i++) {
+  carts[storeIDs[i]] = cartObject(storeIDs[i], []);
 }
 
-var orders = []
-for(var i = 0; i < 3; i++){
-   // TODO: orders should be from existing items in carts
-   orders.push(orderObject(getRandomInt(100), [getRandomExistingItem(), getRandomExistingItem()], Math.round(randomDate()/1000), storeId))
-
+var orders = [];
+for (var i = 0; i < 3; i++) {
+  // TODO: orders should be from existing items in carts
+  orders.push(
+    orderObject(
+      getRandomInt(100),
+      [getRandomExistingItem(), getRandomExistingItem()],
+      Math.round(randomDate() / 1000),
+      storeId
+    )
+  );
 }
 
 // add items to user's carts at random
-var duplicateCheck = []
-for(var i = 0; i < 6; i++){
-  var storeIndex = getRandomInt(3)
-  var randomStore = storeIDs[storeIndex]
-  var randomItem = AllItemsAvailable[randomStore][getRandomInt(5)]
+var duplicateCheck = [];
+for (var i = 0; i < 6; i++) {
+  var storeIndex = getRandomInt(3);
+  var randomStore = storeIDs[storeIndex];
+  var randomItem = AllItemsAvailable[randomStore][getRandomInt(5)];
 
-  var dC = ""+randomStore+""+randomItem
-  if(duplicateCheck.includes(dC) == false){
-    carts[randomStore].items.push(randomItem)
-    duplicateCheck.push(dC)
+  var dC = "" + randomStore + "" + randomItem;
+  if (duplicateCheck.includes(dC) == false) {
+    carts[randomStore].items.push(randomItem);
+    duplicateCheck.push(dC);
   }
 }
 
@@ -119,20 +179,25 @@ for(var i = 0; i < 6; i++){
 //   items.push(createRandomItem())
 // }
 
-var promotions = []
-for(var i = 0; i < 5; i++){
-  var storeId = storeIDs[getRandomInt(3)]
-  var promotion = promotionObject(getRandomInt(100), storeId, getRandomInt(30)+"% off", Math.round(randomDate()/1000))
+var promotions = [];
+for (var i = 0; i < 5; i++) {
+  var storeId = storeIDs[getRandomInt(3)];
+  var promotion = promotionObject(
+    getRandomInt(100),
+    storeId,
+    getRandomInt(30) + "% off",
+    Math.round(randomDate() / 1000)
+  );
   // if(promotions[storeId] == null){
   //   promotions[storeId] = []
   // }
-  promotions/*[storeId]*/.push(promotion)
+  promotions /*[storeId]*/
+    .push(promotion);
 }
 
-var user1 = userObject("1", carts, orders, promotions)
-var users = {}
-users["1"] = user1
-
+var user1 = userObject("1", carts, orders, promotions);
+var users = {};
+users["1"] = user1;
 
 router.get("/carts/:userId", function (req, res, next) {
   // res.send(req.params);
@@ -289,17 +354,17 @@ router.put("/addItem", function (req, res, next) {
   //should price be an input?
 
   var store = AllItemsAvailable[cartId];
-  if(store != null){
+  if (store != null) {
     // TODO this only works bc the itemIDs correspond to array indicies
-    if(itemId > 0 && itemId < AllItemsAvailable[cartId].length){
-      var item = AllItemsAvailable[cartId][itemId]
+    if (itemId > 0 && itemId < AllItemsAvailable[cartId].length) {
+      var item = AllItemsAvailable[cartId][itemId];
       users[userId].carts[cartId].items.push(item);
     }
-  }else{
-    console.log("STORE NULL")
+  } else {
+    console.log("STORE NULL");
   }
   // items.push(newItem);
-  res.json({ "carts": users[userId].carts });
+  res.json({ carts: users[userId].carts });
 });
 
 // /PUT addItem(storeID, itemID, userID)
@@ -310,11 +375,11 @@ router.put("/removeItem", function (req, res, next) {
   //should price be an input?
 
   //itemObject(itemId, name, price, pictureURL, storeId, isStocked)
-  if(users[userId] != null){
-    removeItemFromUserCart(userId, cartId, itemId)
+  if (users[userId] != null) {
+    removeItemFromUserCart(userId, cartId, itemId);
   }
   // items.push(newItem);
-  res.json({ "carts": users[userId].carts });
+  res.json({ carts: users[userId].carts });
 });
 
 router.get("/getCart/:cartId", function (req, res, next) {
@@ -327,11 +392,13 @@ router.get("/getCart/:cartId", function (req, res, next) {
   );
 });
 
-function removeItemFromUserCart(userId, cartId, itemId){
-  users[userId].carts[cartId].items = users[userId].carts[cartId].items.filter (function(e){
-    return itemId != e.id
-  });
-  users[userId].carts[cartId].items = newItems
+function removeItemFromUserCart(userId, cartId, itemId) {
+  users[userId].carts[cartId].items = users[userId].carts[cartId].items.filter(
+    function (e) {
+      return itemId != e.id;
+    }
+  );
+  users[userId].carts[cartId].items = newItems;
 }
 
 function getRandomInt(max) {
@@ -359,20 +426,6 @@ function addItemToCart(cartLocation, itemID, callback) {
   );
 }
 
-// var raw = JSON.stringify({"scanData":"101","quantity":{"unitOfMeasure":"EA","value":1}});
-
-// var requestOptions = {
-//   method: 'POST',
-//   headers: myHeaders,
-//   body: raw,
-//   redirect: 'follow'
-// };
-
-// fetch("https://gateway-staging.ncrcloud.com/emerald/selling-service/v1/carts/{{cart-id}}/items", requestOptions)
-//   .then(response => response.text())
-//   .then(result => console.log(result))
-//   .catch(error => console.log('error', error));
-
 function requestToNCRAPI(method, endpoint, completion, postBody) {
   var username = "241497cc-e915-4366-a079-a256175b95a6";
   var password = "Satvik321!";
@@ -392,8 +445,11 @@ function requestToNCRAPI(method, endpoint, completion, postBody) {
       Date: "Sun, 18 Oct 2020 03:25:09 GMT", // TODO
     },
   };
-  if((method == "POST" || method == "PATCH" || method == "PUT") && postBody != null){
-    options.body = postBody
+  if (
+    (method == "POST" || method == "PATCH" || method == "PUT") &&
+    postBody != null
+  ) {
+    options.body = postBody;
   }
   request(options, function (error, response) {
     if (error) throw new Error(error);
@@ -404,9 +460,13 @@ function requestToNCRAPI(method, endpoint, completion, postBody) {
 
 // get a random date up to 10 days in the future
 function randomDate() {
-  var end = new Date(Date.now() + 1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 10);
-  var start = new Date()
-  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  var end = new Date(
+    Date.now() + 1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 10
+  );
+  var start = new Date();
+  return new Date(
+    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+  );
 }
 
 module.exports = router;
