@@ -1,73 +1,86 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>GTmetrix Analyzer</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="carts.css" />
-  </head>
-  <body style="width: 400px; height: 570px">
-    <div class="worko-tabs">
-      <input
-        class="state"
-        type="radio"
-        title="tab-one"
-        name="tabs-state"
-        id="tab-one"
-        checked
-      />
-      <input
-        class="state"
-        type="radio"
-        title="tab-two"
-        name="tabs-state"
-        id="tab-two"
-      />
-      <input
-        class="state"
-        type="radio"
-        title="tab-three"
-        name="tabs-state"
-        id="tab-three"
-      />
 
-      <div class="tabs flex-tabs">
-        <label for="tab-one" id="tab-one-label" class="tab">Carts</label>
-        <label for="tab-two" id="tab-two-label" class="tab">Promotions</label>
-        <label for="tab-three" id="tab-three-label" class="tab">Orders</label>
+<head>
+  <title>SalesSaver Extension</title>
+  <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="carts.css" />
+  <link rel="stylesheet" href="promo-orders.css" />
+</head>
 
-        <div id="tab-one-panel" class="panel active">
-          <h3>Tab 1</h3>
-          <button class="accordion">Macy's</button>
-          <div class="panel">
-            <p class="tab-text">Lercitation ullamco la</p>
+<body style="width: 500px; height: 788px">
+  <div class="worko-tabs">
+    <input class="state" type="radio" title="tab-one" name="tabs-state" id="tab-one" checked />
+    <input class="state" type="radio" title="tab-two" name="tabs-state" id="tab-two" />
+    <input class="state" type="radio" title="tab-three" name="tabs-state" id="tab-three" />
+
+    <div class="tabs flex-tabs">
+      <label for="tab-one" id="tab-one-label" class="tab">Carts</label>
+      <label for="tab-two" id="tab-two-label" class="tab">Promotions</label>
+      <label for="tab-three" id="tab-three-label" class="tab">Orders</label>
+
+      <div id="tab-one-panel" class="panel active">
+        <!-- style="display: flex; justify-content: space-between; flex-direction: column;"> -->
+        <!-- <h3>Tab 1</h3> -->
+        <div id="all-carts">
+
+
+
+        </div>
+
+
+        <table class="footer-table">
+          <tr>
+            <td><button class="button remove-cart">Remove Selected</button></td>
+            <td><button class="button checkout-cart">Checkout Selected</button></td>
+          </tr>
+
+        </table>
+        <h3 class="checkout-cart" id='checkout-items-list'></h3>
+
+
+       
+
+        
+
+
+
+      </div>
+
+
+
+      <div id="tab-two-panel" class="panel">
+        <div id="promotions" style="display: flex; flex-direction: column;">
+        </div>
+      </div>
+
+      <div id="tab-three-panel" class="panel">
+
+
+        <div id="orders" style="display: flex; flex-direction: column;">
+          <div class="wrap">
+            <div class="search" style="display: flex; flex-direction: row; justify-content: space-between;">
+               <input type="text" class="searchTerm" placeholder="What are you looking for?">
+               <button type="submit" class="searchButton">
+                 <i class="fa fa-search">Seach</i>
+              </button>
+            </div>
+         </div>
+          <div id="scheduled-orders">
+            <h3>Scheduled</h3>
           </div>
-
-          <button class="accordion">Section 2</button>
-          <div class="panel">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
-          </div>
-
-          <button class="accordion">Section 3</button>
-          <div class="panel">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat.
-            </p>
+          <div id="delivered-orders">
+            <h3>Delivered Orders</h3>
           </div>
         </div>
-        <div id="tab-two-panel" class="panel">Tab two content</div>
-        <div id="tab-three-panel" class="panel">Tab three content</div>
       </div>
     </div>
-    <script src="carts.js"></script>
-    <!-- <script src="api.js"></script>
-    <script src="extension.js"></script> -->
-  </body>
+  </div>
+  <script src="carts.js"></script>
+  <!-- <script src="api.js"></script> -->
+  <script src="promotions.js"></script>
+  <script src="orders.js"></script>
+</body>
+
 </html>

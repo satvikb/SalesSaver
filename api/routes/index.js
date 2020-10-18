@@ -120,11 +120,10 @@ function getRandomExistingItem() {
   return AllItemsAvailable[storeIDs[getRandomInt(3)]][getRandomInt(5)];
 }
 
-function orderObject(orderId, items, deliveryDate, cartId) {
+function orderObject(orderId, items, deliveryDate) {
   return {
     id: orderId,
     items: items,
-    cartId: cartId,
     deliveryDate: deliveryDate,
   };
 }
@@ -163,29 +162,21 @@ for (var i = 0; i < 3; i++) {
 }
 
 var orders = [];
-for (var i = 0; i < 3; i++) {
-  // TODO: orders should be from existing items in carts
-  orders.push(
-    orderObject(
-      getRandomInt(100),
-      [getRandomExistingItem(), getRandomExistingItem()],
-      Math.round(randomDate() / 1000),
-      storeId
-    )
-  );
-}
+orders.push(orderObject(getRandomInt(100), [getRandomExistingItem(), getRandomExistingItem()], Math.round(randomDate(true) / 1000)));
+orders.push(orderObject(getRandomInt(100), [getRandomExistingItem()], Math.round(randomDate(true) / 1000)));
+orders.push(orderObject(getRandomInt(100), [getRandomExistingItem(), getRandomExistingItem(), getRandomExistingItem()], Math.round(randomDate(false) / 1000)));
 
 // add items to user's carts at random
 var duplicateCheck = [];
-for (var i = 0; i < 6; i++) {
+for (var i = 0; i < 12; i++) {
   var storeIndex = getRandomInt(3);
   var randomStore = storeIDs[storeIndex];
-  var randomItem = AllItemsAvailable[randomStore][getRandomInt(5)];
+  var randomItem = getRandomExistingItem();
 
-  var dC = "" + randomStore + "" + randomItem;
-  if (duplicateCheck.includes(dC) == false) {
+  var dC = "" + storeIndex + "" + randomItem;
+  if (duplicateCheck.includes(randomItem.id) == false) {
     carts[randomStore].items.push(randomItem);
-    duplicateCheck.push(dC);
+    duplicateCheck.push(randomItem.id);
   }
 }
 
@@ -252,14 +243,39 @@ router.get("/orders/:userId", function (req, res, next) {
 router.post("/checkout", function (req, res, next) {
   var userID = req.body.userId;
   var itemIDs = req.body.items;
-  console.log(JSON.stringify(req.body));
+  console.log(JSON.stringify(req.body)+" "+itemIDs);
 
   var user = users[userID]; //users[key] lol
+
+  var itemsRemoved = []
+
   if (user != null) {
-    for (var i = 0; i < user.carts; i++) {
-      user.carts[i].items.filter(function (e) {
-        return !itemIDs.contains(e.id); //removing items to be checked out
+
+    for (var key in user.carts) {
+      // console.log("REMOV2E "+JSON.stringify(user.carts[key]))
+
+      user.carts[key].items = user.carts[key].items.filter(function (e) {
+        // console.log("D" +itemIDs+" "+e.id+" "+itemIDs.includes(e.id))
+
+        var inArr = false;
+        for(var k = 0; k < itemIDs.length; k++){
+          if(itemIDs[k] == e.id){
+            inArr = true;
+          }
+        }
+        if(inArr){
+          // console.log("REMOVE "+e.id)
+
+          itemsRemoved.push(e)
+        }
+        // if(itemIDs.includes(e.id)){
+
+        //   itemsRemoved.push(e);
+        // }
+        return !inArr; //removing items to be checked out
       });
+      // console.log("REMOV2E "+JSON.stringify(user.carts[key]))
+
     }
   }
 
@@ -343,6 +359,8 @@ router.post("/checkout", function (req, res, next) {
                                       newCartLocation,
                                     function () {
                                       //deleted.
+                                      console.log("Adding order of "+itemsRemoved.length+" items");
+                                      orders.push(orderObject(getRandomInt(100),itemsRemoved, Math.round(randomDate(true) / 1000)));
                                     }
                                   );
                                 },
@@ -406,6 +424,7 @@ router.put("/removeItem", function (req, res, next) {
   res.json({ carts: users[userId].carts });
 });
 
+
 router.get("/getCart/:cartId", function (req, res, next) {
   requestToNCRAPI(
     "GET",
@@ -417,12 +436,17 @@ router.get("/getCart/:cartId", function (req, res, next) {
 });
 
 function removeItemFromUserCart(userId, cartId, itemId) {
+  var removedItem;
   users[userId].carts[cartId].items = users[userId].carts[cartId].items.filter(
     function (e) {
+      if(itemId == e.id){
+        removedItem = e;
+      }
       return itemId != e.id;
     }
   );
   users[userId].carts[cartId].items = newItems;
+  return e;
 }
 
 function getRandomInt(max) {
@@ -483,13 +507,13 @@ function requestToNCRAPI(method, endpoint, completion, postBody) {
 }
 
 // get a random date up to 10 days in the future
-function randomDate() {
+function randomDate(future) {
   var end = new Date(
     Date.now() + 1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 10
   );
   var start = new Date();
   return new Date(
-    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    start.getTime() + (Math.random() * (end.getTime() - start.getTime())*(future == true ? 1 : -1))
   );
 }
 

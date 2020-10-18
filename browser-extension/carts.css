@@ -1,28 +1,164 @@
 .accordion {
-  background-color: #eee;
-  color: #444;
+  background-color: rgb(250, 250, 250);
+  color: rgb(0, 0, 0);
   cursor: pointer;
   padding: 18px;
   width: 100%;
   border: none;
   text-align: left;
   outline: none;
-  font-size: 15px;
+  font-size: 22px;
   transition: 0.4s;
+  /* border-radius: 10px; */
 }
 
 .active,
 .accordion:hover {
-  background-color: #ccc;
+  background-color:rgb(250, 250, 250);
 }
 
-.panel {
-  padding: 0 18px;
-  display: none;
-  background-color: white;
-  overflow: hidden;
+.accordion-content {
+  /* background-color: #69be28; */
+  margin: 10px 0;
+  padding: 5px 8px;
+  width: 100%;
+  display: grid;
+  grid-template-rows: 25px 25px;
+  grid-template-columns: auto auto 1fr auto;
+  grid-template-areas:
+    "select pic name buy"
+    "select pic price buy";
+  align-items: center;
+  gap: 15px;
 }
-.tab-text {
-    /* width: 500px; */
-    background-color: green;
+
+.item-select {
+  grid-area: select;
+  /* border: solid black; */
+}
+
+.item-icon {
+  grid-area: pic;
+  background-color: grey;
+  width: 50px;
+  height: 50px;
+  margin: 10px 2px;
+}
+
+.accordion-panel {
+  /* padding: 0 -20px 0 0; */
+  display: none;
+  /* background-color: rgb(58, 56, 56); */
+  /* background-color: aquamarine; */
+  /* overflow: hidden; */
+}
+.item-name {
+  grid-area: name;
+  margin-top: 30px;
+  font-size: 15px;
+  color: #2e7df7;
+  /* width: 50%; */
+  /* background-color: green; */
+  align-self: center;
+}
+
+.item-price {
+  margin-bottom: 30px;
+  font-size: 15px;
+  grid-area: price;
+  /* background-color: green; */
+  color: red;
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.buy-now-button {
+  /* grid-area: buy; */
+  /* position: absolute; */
+  width: 97px;
+  height: 40px;
+  /* left: 336px;
+  top: 17px; */
+  /* margin-left: -20px; */
+
+  /* UI / Blue */
+
+  display: inline-block;
+  transform: translate(-25%, 50%);
+  background: #2E7DF7;
+  border-radius: 8px;
+  border: none;
+  color: white;
+}
+
+/* Anything with squaredFour is the checkbox in carts */
+/* #squaredFour {
+  width: 20px;
+   position: relative;
+  margin: 20px auto; 
+  display: inline-block;
+  transform: translate(0%, 50%);
+} */
+/* .squaredFour label:after {
+  content: "";
+  width: 9px;
+  height: 5px;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  border: 3px solid #333;
+  border-top: none;
+  border-right: none;
+  background: transparent;
+  opacity: 0;
+  -webkit-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+} */
+/* .squaredFour label:hover::after {
+  opacity: 0.5;
+}
+.squaredFour input[type="checkbox"] {
+  visibility: hidden;
+}
+.squaredFour input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+} */
+
+.footer-table {
+  width: 100%;
+  height: 20vh;
+  
+  /* border: 1px solid black; */
+}
+
+.footer-table td {
+  text-align: center;
+}
+
+.button {
+  width: 90%;
+  height: 50%;
+  /* display: inline-block;
+  top: 50%;
+  transform: translateX(50%); */
+}
+
+
+.button.remove-cart{
+  background-color: #FF3B30;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+}
+
+.button.checkout-cart{
+  background-color: #F0681E;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
 }
