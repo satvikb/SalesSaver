@@ -1,3 +1,23 @@
+.dropdown-sort-by {
+  display: block;
+  margin: 10px;
+  /* margin-left: ; */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  z-index: 1;
+}
+
+.dropdown-sort-by:hover .dropdown-content {
+  display: block;
+}
+
 .item {
   border: solid black 1px;
   border-radius: 10px;
@@ -26,14 +46,14 @@
   position: relative;
 }
 
-.profile-details-icon{
+.profile-details-icon {
   /* position: absolute; */
   display: inline-block;
   /* top: 50%; */
   transform: translateY(15%);
 }
 
-.profile-details-info{
+.profile-details-info {
   /* position: absolute;
   left: 30%; */
   /* transform: translateY(-50%); */
