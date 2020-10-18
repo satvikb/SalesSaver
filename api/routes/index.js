@@ -40,8 +40,8 @@ var itemNames = [
 
 var itemPrices = [29.99, 79.99, 53.99, 119.99, 399.99, 24.99, 8.99, 16.99, 229.99, 21.99, 64.99, 74.99, 24.99, 19.99, 29.99]
 var imageURLs = [
-  "https://i.imgur.com/cfroVp9.png",
-  "https://i.imgur.com/Gn08n71.jpg",
+  "https://i.imgur.com/7dMDlGF.jpg",
+  "https://i.imgur.com/HTOx3mr.jpg",
   "https://i.imgur.com/rywZ2D3.jpg",
   "https://i.imgur.com/1E1rRrX.jpg",
   "https://i.imgur.com/LxykNoG.jpg",
