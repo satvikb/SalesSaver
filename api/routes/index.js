@@ -243,14 +243,39 @@ router.get("/orders/:userId", function (req, res, next) {
 router.post("/checkout", function (req, res, next) {
   var userID = req.body.userId;
   var itemIDs = req.body.items;
-  console.log(JSON.stringify(req.body));
+  console.log(JSON.stringify(req.body)+" "+itemIDs);
 
   var user = users[userID]; //users[key] lol
+
+  var itemsRemoved = []
+
   if (user != null) {
-    for (var i = 0; i < user.carts; i++) {
-      user.carts[i].items.filter(function (e) {
-        return !itemIDs.contains(e.id); //removing items to be checked out
+
+    for (var key in user.carts) {
+      // console.log("REMOV2E "+JSON.stringify(user.carts[key]))
+
+      user.carts[key].items = user.carts[key].items.filter(function (e) {
+        // console.log("D" +itemIDs+" "+e.id+" "+itemIDs.includes(e.id))
+
+        var inArr = false;
+        for(var k = 0; k < itemIDs.length; k++){
+          if(itemIDs[k] == e.id){
+            inArr = true;
+          }
+        }
+        if(inArr){
+          // console.log("REMOVE "+e.id)
+
+          itemsRemoved.push(e)
+        }
+        // if(itemIDs.includes(e.id)){
+
+        //   itemsRemoved.push(e);
+        // }
+        return !inArr; //removing items to be checked out
       });
+      // console.log("REMOV2E "+JSON.stringify(user.carts[key]))
+
     }
   }
 
@@ -334,7 +359,8 @@ router.post("/checkout", function (req, res, next) {
                                       newCartLocation,
                                     function () {
                                       //deleted.
-
+                                      console.log("Adding order of "+itemsRemoved.length+" items");
+                                      orders.push(orderObject(getRandomInt(100),itemsRemoved, Math.round(randomDate(true) / 1000)));
                                     }
                                   );
                                 },
@@ -398,6 +424,7 @@ router.put("/removeItem", function (req, res, next) {
   res.json({ carts: users[userId].carts });
 });
 
+
 router.get("/getCart/:cartId", function (req, res, next) {
   requestToNCRAPI(
     "GET",
@@ -409,12 +436,17 @@ router.get("/getCart/:cartId", function (req, res, next) {
 });
 
 function removeItemFromUserCart(userId, cartId, itemId) {
+  var removedItem;
   users[userId].carts[cartId].items = users[userId].carts[cartId].items.filter(
     function (e) {
+      if(itemId == e.id){
+        removedItem = e;
+      }
       return itemId != e.id;
     }
   );
   users[userId].carts[cartId].items = newItems;
+  return e;
 }
 
 function getRandomInt(max) {
