@@ -14,7 +14,6 @@ for (i = 0; i < acc.length; i++) {
 }
 
 
-
 // TODO come back and fix this, needs to distribute items among store names
 document.addEventListener(
   "DOMContentLoaded",
@@ -50,7 +49,7 @@ document.addEventListener(
         </div>
               <!-- add icon -->
         <img class="item-icon" src="${item.img_src}"></img>
-        <p class="tab-text">${item.name}</p>
+        <p class="item-name">${item.name}</p>
         <p class="item-price"><span class="old-price">$${item.old_price}</span> $${item.new_price}</p>
         <!-- make this part below a grid prob -->
         <button class="buy-now-button">Buy Now</button>

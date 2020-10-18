@@ -20,7 +20,7 @@
   /* background-color: #69be28; */
   margin: 10px 0;
   padding: 5px 8px;
-  width: 88%;
+  width: 100%;
   display: grid;
   grid-template-rows: 25px 25px;
   grid-template-columns: auto auto 1fr auto;
@@ -52,10 +52,10 @@
   /* overflow: hidden; */
 }
 .item-name {
+  grid-area: name;
   margin-top: 30px;
   font-size: 15px;
   color: #2e7df7;
-  grid-area: name;
   /* width: 50%; */
   /* background-color: green; */
   align-self: center;
@@ -89,7 +89,6 @@
   border-radius: 8px;
 }
 
-
 /* Anything with squaredFour is the checkbox in carts */
 .squaredFour {
   width: 20px;
@@ -117,7 +116,7 @@
   box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
 }
 .squaredFour label:after {
-  content: '';
+  content: "";
   width: 9px;
   height: 5px;
   position: absolute;
