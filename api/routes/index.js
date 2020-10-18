@@ -348,6 +348,7 @@ router.post("/checkout", function (req, res, next) {
 
 // /PUT addItem(storeID, itemID, userID)
 router.put("/addItem", function (req, res, next) {
+  console.log(req.body);
   var cartId = req.body.cartId;
   var userId = req.body.userId;
   var itemId = req.body.itemId;
