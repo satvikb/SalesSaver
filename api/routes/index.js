@@ -18,26 +18,47 @@ var router = express.Router();
 // });
 
 var storeIDs = [100, 200, 300];
-var storeNames = ["Burdell's Boutique", "Not Publix", "S3"];
+// Yellow Jackets, Home Depot, Target Logo
+var storeNames = ["Burdell's Boutique", "House Depot", "Bullseye"];
 var itemNames = [
   "White Scarf",
   "Pink Dress",
   "Blue Necklace",
   "Sapphire Pearl",
-  "Diamong Ring",
-  "Milk",
-  "Eggs",
-  "Cheese",
-  "Tortillas",
-  "Ketchup",
+  "Diamond Ring",
+  "Wooden Chair",
+  "Garden Hose",
+  "Large Container",
+  "Steel Grill",
+  "Blue Paint Bucket",
   "Black Dress Shoes",
   "White Sneakers",
   "Blue Sweatpants",
-  "Roses",
-  "14",
+  "Gray Shorts",
+  "Yellow Jacket",
 ];
-var url =
-  "https://images.squarespace-cdn.com/content/v1/5105d89ee4b0869f6416d903/1561572439442-WJYDG53JMTL55N4JS8ZK/ke17ZwdGBToddI8pDm48kMtiXMEMZ8ID8MVhA-T_Qc9Zw-zPPgdn4jUwVcJE1ZvWQUxwkmyExglNqGp0IvTJZamWLI2zvYWH8K3-s_4yszcp2ryTI0HqTOaaUohrI8PIXpy3a2Cibo6eml5BpILeGX-BY3QvcZT7F317PmmzovI/c3-hoodie-black-front.png";
+var imageURLs = [
+  "https://i.imgur.com/cfroVp9.png",
+  "https://i.imgur.com/Gn08n71.jpg",
+  "https://i.imgur.com/rywZ2D3.jpg",
+  "https://i.imgur.com/1E1rRrX.jpg",
+  "https://i.imgur.com/LxykNoG.jpg",
+
+  "https://i.imgur.com/GvC2XNF.jpg",
+  "https://i.imgur.com/wu0ZxrU.jpg",
+  "https://i.imgur.com/8RRiUht.jpg",
+  "https://i.imgur.com/akCUAjp.jpg",
+  "https://i.imgur.com/ZfEnR9r.jpg",
+
+  "https://i.imgur.com/jx6hPvO.jpg",
+  "https://i.imgur.com/VWkfy7F.jpg",
+  "https://i.imgur.com/xarfBgY.jpg",
+  "https://i.imgur.com/9zeiCRi.jpg",
+  "https://i.imgur.com/Hjzqvr8.jpg"
+
+];
+
+var storePfpURLs = ["https://i.imgur.com/71DpWsC.png", "https://i.imgur.com/rZkTOOJ.png", "https://i.imgur.com/XVBufQ6.jpg"]
 
 var AllItemsAvailable = {};
 
@@ -67,7 +88,7 @@ for (var i = 0; i < 3; i++) {
       itemId,
       itemNames[i * 5 + j],
       getRandomInt(20) + 10 - 0.01,
-      url,
+      imageURLs[itemId],
       storeId,
       true
     );
@@ -117,8 +138,8 @@ function itemObject(itemId, name, price, pictureURL, cartId, isStocked) {
   };
 }
 
-function cartObject(cartId, items) {
-  return { id: cartId, items: items };
+function cartObject(cartId, items, pfpURL) {
+  return { id: cartId, items: items, pfpURL: pfpURL};
 }
 
 function userObject(userId, carts, orders, promotions) {
@@ -136,7 +157,7 @@ function promotionObject(promotionId, cartId, description, expiryDate) {
 
 var carts = {};
 for (var i = 0; i < 3; i++) {
-  carts[storeIDs[i]] = cartObject(storeIDs[i], []);
+  carts[storeIDs[i]] = cartObject(storeIDs[i], [], storePfpURLs[i]);
 }
 
 var orders = [];
@@ -443,7 +464,7 @@ function requestToNCRAPI(method, endpoint, completion, postBody) {
       Authorization: auth, //'AccessKey 4f3c6a1cd2e5471aa4eb0add352c434e:Hg8EFh1v4rztvSrCvSb5tYKBnDekyEW+AX5Pd4uxftvdILWLmSBcy8wjf80o8wyr+mRcUYSG71o7x0vwRz7l0w==',
       "nep-organization": "6df906a55b2d469fafe15f8c1db16d63",
       "nep-enterprise-unit": "ffdd296de1c5441994c8788c0b3b3bcf",
-      Date: "Sun, 18 Oct 2020 03:25:09 GMT", // TODO
+      Date: "Sun, 18 Oct 2020 07:09:40 GMT", // TODO
     },
   };
   if (
