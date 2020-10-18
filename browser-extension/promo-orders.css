@@ -72,9 +72,10 @@
 /* styling search bar */
 .search input[type="text"] {
   width: 300px;
-  height: 25px;
-  border-radius: 25px;
-  border: none;
+  height: 40px;
+  border-radius: 10px;
+  border: solid grey 0.2px;
+  padding: 5px;
 }
 
 .search {
@@ -82,13 +83,16 @@
   margin: 7px;
 }
 
+/*  class="search-icon" */
 .search button {
-  background-color: #0074d9;
+  background-color: #2e7df7;
   color: #f2f2f2;
   float: right;
+  height: 50px;
   padding: 5px 10px;
   margin-right: 16px;
-  font-size: 12px;
+  font-size: 20px;
   border: none;
+  border-radius: 10px;
   cursor: pointer;
 }
