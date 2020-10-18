@@ -15,6 +15,14 @@
     opacity: 1;
   }
 }
+
+/* html *
+{
+   font-size: 1em !important;
+   color: #000 !important;
+   font-family: Arial !important;
+} */
+
 body {
   -webkit-animation: fake 1s infinite;
   animation: fake 1s infinite;
@@ -59,6 +67,10 @@ body {
 }
 .worko-tabs .tab:hover {
   background-color: #fff;
+}
+
+.tab{
+  font-size: large;
 }
 
 #tab-one:checked ~ .tabs #tab-one-label,

@@ -19,9 +19,13 @@ document.getElementsByClassName("remove-cart")[0].addEventListener("click", func
   
 
   items = document.getElementsByClassName("cart-item")
-
+  console.log(items.length)
   text = ""
   Array.prototype.forEach.call(items, function (item) {
+    checkbox = item.getElementsByTagName("input")[0]
+    if(checkbox.checked){
+      console.log("CHECKED "+item.getAttribute("name"))
+    }
     //need to make a call to backend here
     text += item.getAttribute("name")
     console.log(item.getAttribute("name"), item.getAttribute("price"))
@@ -86,10 +90,9 @@ document.addEventListener(
       `
       <div class="accordion-content cart-item" name="${item.name}" price="${item.new_price}">
         <!-- add select button -->
-        <div class="item-select squaredFour">
-          <input type="checkbox" value="None" id="squaredFour" name="check" />
-          <label for="squaredFour"></label>
-        </div>
+        <input type="checkbox" value="None" id="squaredFour" name="check" />
+
+        
               <!-- add icon -->
         <img class="item-icon" src="${item.img_src}"></img>
         <p class="item-name">${item.name}</p>
