@@ -120,11 +120,10 @@ function getRandomExistingItem() {
   return AllItemsAvailable[storeIDs[getRandomInt(3)]][getRandomInt(5)];
 }
 
-function orderObject(orderId, items, deliveryDate, cartId) {
+function orderObject(orderId, items, deliveryDate) {
   return {
     id: orderId,
     items: items,
-    cartId: cartId,
     deliveryDate: deliveryDate,
   };
 }
@@ -163,29 +162,21 @@ for (var i = 0; i < 3; i++) {
 }
 
 var orders = [];
-for (var i = 0; i < 3; i++) {
-  // TODO: orders should be from existing items in carts
-  orders.push(
-    orderObject(
-      getRandomInt(100),
-      [getRandomExistingItem(), getRandomExistingItem()],
-      Math.round(randomDate() / 1000),
-      storeId
-    )
-  );
-}
+orders.push(orderObject(getRandomInt(100), [getRandomExistingItem(), getRandomExistingItem()], Math.round(randomDate(true) / 1000)));
+orders.push(orderObject(getRandomInt(100), [getRandomExistingItem()], Math.round(randomDate(true) / 1000)));
+orders.push(orderObject(getRandomInt(100), [getRandomExistingItem(), getRandomExistingItem(), getRandomExistingItem()], Math.round(randomDate(false) / 1000)));
 
 // add items to user's carts at random
 var duplicateCheck = [];
-for (var i = 0; i < 6; i++) {
+for (var i = 0; i < 12; i++) {
   var storeIndex = getRandomInt(3);
   var randomStore = storeIDs[storeIndex];
-  var randomItem = AllItemsAvailable[randomStore][getRandomInt(5)];
+  var randomItem = getRandomExistingItem();
 
-  var dC = "" + randomStore + "" + randomItem;
-  if (duplicateCheck.includes(dC) == false) {
+  var dC = "" + storeIndex + "" + randomItem;
+  if (duplicateCheck.includes(randomItem.id) == false) {
     carts[randomStore].items.push(randomItem);
-    duplicateCheck.push(dC);
+    duplicateCheck.push(randomItem.id);
   }
 }
 
@@ -343,6 +334,7 @@ router.post("/checkout", function (req, res, next) {
                                       newCartLocation,
                                     function () {
                                       //deleted.
+
                                     }
                                   );
                                 },
@@ -483,13 +475,13 @@ function requestToNCRAPI(method, endpoint, completion, postBody) {
 }
 
 // get a random date up to 10 days in the future
-function randomDate() {
+function randomDate(future) {
   var end = new Date(
     Date.now() + 1000 /*sec*/ * 60 /*min*/ * 60 /*hour*/ * 24 /*day*/ * 10
   );
   var start = new Date();
   return new Date(
-    start.getTime() + Math.random() * (end.getTime() - start.getTime())
+    start.getTime() + (Math.random() * (end.getTime() - start.getTime())*(future == true ? 1 : -1))
   );
 }
 

@@ -23,7 +23,7 @@ function addPromotionToDoc(ps, carts) {
     var promos_div = document.getElementById("promotions")
     promos_div.innerHTML += `<div class='item' style='display: flex; flex-direction: row; flex-flow: space-between'>
         <!-- should change to not a flexbox but im bad at css :] -->
-        <header class='profile-details'>
+        <header class='profile-details-icon'>
           <div>
             <img
               src=${carts.carts[ps[i].cartId].pfpURL}
