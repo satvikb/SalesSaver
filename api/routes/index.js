@@ -244,7 +244,7 @@ router.post("/checkout", function (req, res, next) {
   var userID = req.body.userId;
   var itemIDs = req.body.items;
   console.log(JSON.stringify(req.body));
-
+  
   var user = users[userID]; //users[key] lol
   if (user != null) {
     for (var i = 0; i < user.carts; i++) {
