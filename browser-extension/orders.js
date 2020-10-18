@@ -32,12 +32,12 @@ document.addEventListener(
         div_to_insert.innerHTML += `<div class='item' style='display: flex; flex-direction: row; flex-flow: space-between'>
               <!-- should change to not a flexbox but im bad at css :] -->
               <header class='profile-details'>
-                <div>
+                <div class='profile-details-icon'>
                   <img
                     src=${p.img_src}
                     alt='' class='profile-img' />
                 </div>
-              </header> <div>
+              </header> <div class='profile-details-info'>
                 <span class='item-label'>${p.name}</span>
                 <h3 class='item-msg'>${p.sold_by}</h3>
                 <h4 class='item-msg'>${p.delivery_date}</h4>

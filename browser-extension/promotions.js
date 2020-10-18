@@ -1,7 +1,7 @@
 function getCarts() {
   var xhttp = new XMLHttpRequest();
   cart_url = "http://localhost:3000/carts/1"
-  a = 
+  a =
   xhttp.onreadystatechange = function () {
     if (this.readyState == 4 && this.status == 200) {
       // Typical action to be performed when the document is ready:
@@ -17,7 +17,7 @@ function getCarts() {
 
 function addPromotionToDoc(ps, carts) {
   for (i = 0; i < ps.length; i++) {
-    
+
     var utcSeconds = 1234567890;
 
     var promos_div = document.getElementById("promotions")
@@ -56,7 +56,7 @@ document.addEventListener(
         carts = getCarts()
 
         addPromotionToDoc(ps, carts)
-        
+
         // res.promotions.forEach(p => addPromotionToDoc(p))
       }
     };

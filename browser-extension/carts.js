@@ -21,9 +21,13 @@ document.getElementsByClassName("remove-cart")[0].addEventListener("click", func
   
 
   items = document.getElementsByClassName("cart-item")
-
+  console.log(items.length)
   text = ""
   Array.prototype.forEach.call(items, function (item) {
+    checkbox = item.getElementsByTagName("input")[0]
+    if(checkbox.checked){
+      console.log("CHECKED "+item.getAttribute("name"))
+    }
     //need to make a call to backend here
     text += item.getAttribute("name")
     console.log(item.getAttribute("name"), item.getAttribute("price"))
