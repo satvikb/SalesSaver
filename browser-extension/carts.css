@@ -89,6 +89,8 @@
   border-radius: 8px;
 }
 
+
+/* Anything with squaredFour is the checkbox in carts */
 .squaredFour {
   width: 20px;
   position: relative;
@@ -115,7 +117,7 @@
   box-shadow: inset 0px 1px 1px white, 0px 1px 3px rgba(0, 0, 0, 0.5);
 }
 .squaredFour label:after {
-  content: "";
+  content: '';
   width: 9px;
   height: 5px;
   position: absolute;
