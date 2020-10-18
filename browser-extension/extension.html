@@ -6,33 +6,33 @@
 
   </head>
   <body style="width:400px; height:570px">
-    <!-- <div class="header">
-      <h1>Header</h1>
-      <p>Resize the browser window to see the responsive effect.</p>
-    </div> -->
-    <div class="tab center" id="centeredmenu">
-      <ul>
-      <button id="cartBtn" class="tablinks">Carts</button>
-      <button id="promoBtn" class="tablinks">Promotions</button>
-      <button id="ordersBtn" class="tablinks">Orders</button>
-      </ul>
-    </div>
-    <div class="row">
-      <div class="column">
-        <div id="cartTab">
-          <h2>Column asdas das asad </h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
-        </div>
-        <div id="promotionsTab">
-          <h2>Colum2n</h2>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sit amet pretium urna. Vivamus venenatis velit nec neque ultricies, eget elementum magna tristique. Quisque vehicula, risus eget aliquam placerat, purus leo tincidunt eros, eget luctus quam orci in velit. Praesent scelerisque tortor sed accumsan convallis.</p>
-        </div>
-        <div id="ordersTab">
+    
 
-        </div>
+    <div class="worko-tabs">
+  
+      <input class="state" type="radio" title="tab-one" name="tabs-state" id="tab-one" checked />
+      <input class="state" type="radio" title="tab-two" name="tabs-state" id="tab-two" />
+      <input class="state" type="radio" title="tab-three" name="tabs-state" id="tab-three" />
+  
+      <div class="tabs flex-tabs">
+          <label for="tab-one" id="tab-one-label" class="tab">Carts</label>
+          <label for="tab-two" id="tab-two-label" class="tab">Promotions</label>
+          <label for="tab-three" id="tab-three-label" class="tab">Orders</label>
+  
+          <div id="tab-one-panel" class="panel active">
+            <h3>Responsive CSS Tabs - Flexbox</h3>
+            <p>CSS only tabs built using flexbox, when the viewport drops below 600px wide the tabs turn into an accordion by chaging the flex order of the elements.</p>
+          </div>
+          <div id="tab-two-panel" class="panel">
+              Tab two content
+          </div>
+          <div id="tab-three-panel" class="panel">
+              Tab three content
+          </div>
       </div>
-    </div>
-    <button id="checkPage">Check this page now!</button>
+  
+  </div>
+    
     <script src="api.js"></script>
     <script src="extension.js"></script>
   </body>
