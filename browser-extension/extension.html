@@ -28,12 +28,12 @@
 
           <button class="accordion">Hollister</button>
           <div class="accordion-panel">
-            <div class=accordion-content>
+            <div class="accordion-content cart-item">
               <!-- add select button -->
-              <div class="item-select squaredFour">
-                <input type="checkbox" value="None" id="squaredFour" name="check" />
-                <label for="squaredFour"></label>
-              </div>
+              <input type="checkbox" value="None" id="squaredFour" name="check" />
+              <!-- <div class="item-select squaredFour">
+                
+              </div> -->
               <!-- add icon -->
               <div class="item-icon"></div>
               <p class="item-name">Lercitation ullamco la</p>
@@ -46,12 +46,14 @@
 
           <button class="accordion">American Eagle</button>
           <div class="accordion-panel">
-            <div class=accordion-content>
+            <div class="accordion-content cart-item">
               <!-- add select button -->
-              <div class="item-select squaredFour">
+              <input type="checkbox" value="None" id="squaredFour" name="check" />
+
+              <!-- <div class="item-select squaredFour">
                 <input type="checkbox" value="None" id="squaredFour" name="check" />
                 <label for="squaredFour"></label>
-              </div>
+              </div> -->
               <!-- add icon -->
               <div class="item-icon"></div>
               <p class="item-name">Lercitation ullamco la</p>
@@ -62,17 +64,23 @@
           </div>
         </div>
 
-
-        <button class="button remove-cart">Remove</button>
-        <button class="button checkout-cart">Checkout</button>
+        <table class="footer-table">
+          <tr>
+            <td><button class="button remove-cart">Remove Selected</button></td>
+            <td><button class="button checkout-cart">Checkout Selected</button></td>
+          </tr>
+          
+        </table>
+        
 
         <!-- <div class="box-new">
           <button class="button"><a href="#popup1">Let me Pop up</a></button>
         </div> -->
-        <p>toremove: </p>
+
+        <!-- <p>toremove: </p>
         <p id='remove-items-list'></p>
         <p>checkout: </p>
-        <p id='checkout-items-list'></p>
+        <p id='checkout-items-list'></p> -->
 <!-- 
 
 
