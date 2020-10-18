@@ -130,9 +130,9 @@ function addItemToDoc(item) {
   s = ""
 
   s += `
-  
-        <button class="accordion">${item.storeName}</button>
-        <div class="accordion-panel">`
+
+        <button class="accordion" active>${item.storeName}</button>
+        <div class="accordion-panel" style='display: block'>`
   // macys_div.innerHTML += getThings(item.items)
   console.log(item.items, item.items.length)
   for (j = 0; j < item.items.length; j++) {

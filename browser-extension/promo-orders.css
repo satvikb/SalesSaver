@@ -30,7 +30,7 @@
   /* position: absolute; */
   display: inline-block;
   /* top: 50%; */
-  transform: translateY(25%);
+  transform: translateY(15%);
 }
 
 .profile-details-info{

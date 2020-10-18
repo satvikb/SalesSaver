@@ -1,6 +1,6 @@
 .accordion {
-  background-color: #eee;
-  color: #444;
+  background-color: rgb(250, 250, 250);
+  color: rgb(0, 0, 0);
   cursor: pointer;
   padding: 18px;
   width: 100%;
@@ -9,11 +9,12 @@
   outline: none;
   font-size: 22px;
   transition: 0.4s;
+  /* border-radius: 10px; */
 }
 
 .active,
 .accordion:hover {
-  background-color: #ccc;
+  background-color:rgb(250, 250, 250);
 }
 
 .accordion-content {
@@ -128,7 +129,8 @@
 
 .footer-table {
   width: 100%;
-  height: 30%;
+  height: 20vh;
+  
   /* border: 1px solid black; */
 }
 
@@ -160,3 +162,85 @@
   border-radius: 6px;
   font-size: 16px;
 }
+
+.wrapper
+  &.active
+    .arrow 
+      transform: rotate(45deg) translate(-5px,-5px)
+      &:before
+        transform: translate(10px,0)
+      &:after
+        transform: rotate(90deg) translate(10px,0)
+    ul
+      opacity: 0.3
+      height: 108px
+      
+.wrapper2
+  &.active
+    ul
+      margin-top: 12px
+    .arrow
+      transform: rotate(45deg) translate(38px,38px)
+      opacity: 0.6
+      &:before
+        transform: translate(5px,0)
+      &:after
+        transform: rotate(90deg) translate(5px,0)
+
+.wrapper3
+  .arrow
+    transform: rotate(0)
+    left: 0
+    &:before, &:after
+      background-color: transparent
+      width: 3px
+      height: 10px
+      display: inline-block
+      position: absolute
+      border-bottom: 12px solid white
+      top: 0
+      left: 0
+      transform: rotate(0)
+    &:before
+      transform: rotate(-135deg)
+    &:after 
+      transform: rotate(135deg)
+      
+  &.active
+    .arrow
+      transform: rotate(0)
+      transform: translate(0, -6px)
+      &:before
+        transform: rotate(-45deg)
+      &:after
+        transform: rotate(45deg)
+      
+  
+
+.arrow
+  width: 13px
+  height: 13px
+  display: inline-block
+  position: relative
+  bottom: -5px
+  left: -10px
+  transition: 0.4s ease
+  margin-top: 2px
+  text-align: left
+  transform: rotate(45deg)
+  float: right
+  &:before, &:after
+    position: absolute
+    content: ''
+    display: inline-block
+    width: 12px
+    height: 3px
+    background-color: #fff
+    transition: 0.4s ease
+  &:after
+    position: absolute
+    transform: rotate(90deg)
+    top: -5px
+    left: 5px
+  
+  

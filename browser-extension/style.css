@@ -16,16 +16,18 @@
   }
 }
 
-/* html *
+html *
 {
-   font-size: 1em !important;
-   color: #000 !important;
-   font-family: Arial !important;
-} */
+   /* font-size: 1em !important; */
+   /* color: #000 !important; */
+   /* font-family: 'Roboto', sans-serif !important; */
+}
+
 
 body {
   -webkit-animation: fake 1s infinite;
   animation: fake 1s infinite;
+  font-family: 'Roboto', sans-serif;
 }
 
 .worko-tabs {
