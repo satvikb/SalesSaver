@@ -140,8 +140,8 @@ function itemObject(itemId, name, price, pictureURL, cartId, isStocked) {
   };
 }
 
-function cartObject(cartId, items, pfpURL) {
-  return { id: cartId, items: items, pfpURL: pfpURL};
+function cartObject(cartId, items, pfpURL, storeName) {
+  return { id: cartId, items: items, pfpURL: pfpURL, storeName: storeName};
 }
 
 function userObject(userId, carts, orders, promotions) {
@@ -159,7 +159,7 @@ function promotionObject(promotionId, cartId, description, expiryDate) {
 
 var carts = {};
 for (var i = 0; i < 3; i++) {
-  carts[storeIDs[i]] = cartObject(storeIDs[i], [], storePfpURLs[i]);
+  carts[storeIDs[i]] = cartObject(storeIDs[i], [], storePfpURLs[i], storeNames[i]);
 }
 
 var orders = [];
