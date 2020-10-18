@@ -1,43 +1,28 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>GTmetrix Analyzer</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="carts.css" />
-    <link rel="stylesheet" href="promo-orders.css" />
-  </head>
-  <body style="width: 500px; height: 788px">
-    <div class="worko-tabs">
-      <input
-        class="state"
-        type="radio"
-        title="tab-one"
-        name="tabs-state"
-        id="tab-one"
-        checked
-      />
-      <input
-        class="state"
-        type="radio"
-        title="tab-two"
-        name="tabs-state"
-        id="tab-two"
-      />
-      <input
-        class="state"
-        type="radio"
-        title="tab-three"
-        name="tabs-state"
-        id="tab-three"
-      />
 
-      <div class="tabs flex-tabs">
-        <label for="tab-one" id="tab-one-label" class="tab">Carts</label>
-        <label for="tab-two" id="tab-two-label" class="tab">Promotions</label>
-        <label for="tab-three" id="tab-three-label" class="tab">Orders</label>
+<head>
+  <title>GTmetrix Analyzer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="carts.css" />
+  <link rel="stylesheet" href="promo-orders.css" />
+</head>
 
-        <div id="tab-one-panel" class="panel active">
-          <!-- <h3>Tab 1</h3> -->
+<body style="width: 500px; height: 788px">
+  <div class="worko-tabs">
+    <input class="state" type="radio" title="tab-one" name="tabs-state" id="tab-one" checked />
+    <input class="state" type="radio" title="tab-two" name="tabs-state" id="tab-two" />
+    <input class="state" type="radio" title="tab-three" name="tabs-state" id="tab-three" />
+
+    <div class="tabs flex-tabs">
+      <label for="tab-one" id="tab-one-label" class="tab">Carts</label>
+      <label for="tab-two" id="tab-two-label" class="tab">Promotions</label>
+      <label for="tab-three" id="tab-three-label" class="tab">Orders</label>
+
+      <div id="tab-one-panel" class="panel active">
+        <!-- style="display: flex; justify-content: space-between; flex-direction: column;"> -->
+        <!-- <h3>Tab 1</h3> -->
+        <div>
           <button class="accordion">Macy's</button>
           <div class="accordion-panel" id="Macys"></div>
 
@@ -58,6 +43,7 @@
             </div>
           </div>
 
+
           <button class="accordion">American Eagle</button>
           <div class="accordion-panel">
             <div class=accordion-content>
@@ -75,13 +61,42 @@
             </div>
           </div>
         </div>
-        <div id="tab-two-panel" class="panel">
-          <div id="promotions" style="display: flex; flex-direction: column;">
+
+
+        <button class="button remove-cart">Remove</button>
+        <button class="button checkout-cart">Checkout</button>
+
+        <!-- <div class="box-new">
+          <button class="button"><a href="#popup1">Let me Pop up</a></button>
+        </div> -->
+        <p>toremove: </p>
+        <p id='remove-items-list'></p>
+        <p>checkout: </p>
+        <p id='checkout-items-list'></p>
+<!-- 
+
+
+        <div id="popup1" class="overlay">
+          <div class="popup-new">
+            <h2>Here i am</h2>
+            <a class="close" href="#">&times;</a>
+            <div class="content">
+              Thank to pop me out of that button, but now i'm done so you can close this window.
+            </div>
           </div>
+        </div> -->
+
+
+      </div>
+
+
+      <div id="tab-two-panel" class="panel">
+        <div id="promotions" style="display: flex; flex-direction: column;">
         </div>
-        
-        <div id="tab-three-panel" class="panel">
-          <!-- <div class="search"> 
+      </div>
+
+      <div id="tab-three-panel" class="panel">
+        <!-- <div class="search"> 
             <form action="#"> 
                 <input type="text"
                     placeholder=" Search Courses"
@@ -94,21 +109,22 @@
             </form> 
           </div>  -->
 
-          
-          <div id="orders" style="display: flex; flex-direction: column;">
-            <div id="scheduled-orders">
-              <h3>Scheduled</h3>
-            </div>
-            <div id="delivered-orders">
-              <h3>Delivered Orders</h3>
-            </div>
+
+        <div id="orders" style="display: flex; flex-direction: column;">
+          <div id="scheduled-orders">
+            <h3>Scheduled</h3>
+          </div>
+          <div id="delivered-orders">
+            <h3>Delivered Orders</h3>
           </div>
         </div>
       </div>
     </div>
-    <script src="carts.js"></script>
-    <!-- <script src="api.js"></script> -->
-    <script src="promotions.js"></script>
-    <script src="orders.js"></script>
-  </body>
+  </div>
+  <script src="carts.js"></script>
+  <!-- <script src="api.js"></script> -->
+  <script src="promotions.js"></script>
+  <script src="orders.js"></script>
+</body>
+
 </html>

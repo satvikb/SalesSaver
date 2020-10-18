@@ -14,6 +14,49 @@ for (i = 0; i < acc.length; i++) {
 }
 
 
+
+document.getElementsByClassName("remove-cart")[0].addEventListener("click", function() {
+  
+
+  items = document.getElementsByClassName("cart-item")
+
+  text = ""
+  Array.prototype.forEach.call(items, function (item) {
+    //need to make a call to backend here
+    text += item.getAttribute("name")
+    console.log(item.getAttribute("name"), item.getAttribute("price"))
+  });
+
+  console.log("text is", text)
+  document.getElementById("remove-items-list").innerHTML = text
+
+
+
+  console.log("clicked the button :)", )
+});
+
+
+document.getElementsByClassName("checkout-cart")[0].addEventListener("click", function() {
+  
+
+  items = document.getElementsByClassName("cart-item")
+
+  text = ""
+  Array.prototype.forEach.call(items, function (item) {
+    //need to make a call to backend here
+    text += item.getAttribute("name")
+    console.log(item.getAttribute("name"), item.getAttribute("price"))
+    
+  });
+
+  console.log("text is", text)
+  document.getElementById("checkout-items-list").innerHTML = text
+
+
+
+  console.log("clicked the button :)", )
+});
+
 // TODO come back and fix this, needs to distribute items among store names
 document.addEventListener(
   "DOMContentLoaded",
@@ -41,7 +84,7 @@ document.addEventListener(
       console.log("getting here items")
       macys_div.innerHTML += 
       `
-      <div class=accordion-content>
+      <div class="accordion-content cart-item" name="${item.name}" price="${item.new_price}">
         <!-- add select button -->
         <div class="item-select squaredFour">
           <input type="checkbox" value="None" id="squaredFour" name="check" />
@@ -60,3 +103,4 @@ document.addEventListener(
   },
   false
 );
+
