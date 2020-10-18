@@ -49,7 +49,7 @@ document.addEventListener(
           <label for="squaredFour"></label>
         </div>
               <!-- add icon -->
-        <div class="item-icon"></div>
+        <img class="item-icon" src="${item.img_src}"></img>
         <p class="tab-text">${item.name}</p>
         <p class="item-price"><span class="old-price">$${item.old_price}</span> $${item.new_price}</p>
         <!-- make this part below a grid prob -->
