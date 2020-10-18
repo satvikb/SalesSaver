@@ -84,7 +84,7 @@ document.addEventListener(
   function yourFunction2(){
     // do whatever you like here
   
-    setTimeout(refreshOrders(), 1000);
+    setTimeout(refreshOrders, 1000);
   }
   
   yourFunction2();

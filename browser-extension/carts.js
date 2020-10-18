@@ -1,4 +1,27 @@
+function refreshCarts() {
+  carts = getCarts()
+  console.log(carts.carts)
 
+
+
+  var macys_div = document.getElementById("all-carts")
+  macys_div.innerHTML = ""
+  Object.values(carts.carts).forEach(item => addItemToDoc(item))
+  var acc = document.getElementsByClassName("accordion");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+      if (panel.style.display === "block") {
+        panel.style.display = "none";
+      } else {
+        panel.style.display = "block";
+      }
+    });
+  }
+}
 
 function getCarts() {
   var xhttp = new XMLHttpRequest();
@@ -32,6 +55,13 @@ function postCheckout(body) {
 
   xhttp.open("POST", cart_url, false);
   xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+  xhttp.onload = function (e) {
+    if (xhttp.readyState === 4) {
+      refreshCarts()
+      console.log("tried refreshing")
+    }
+  };
 
   xhttp.send(JSON.stringify(body));
   return a;
@@ -115,7 +145,14 @@ document.getElementsByClassName("checkout-cart")[0].addEventListener("click", fu
 // TODO come back and fix this, needs to distribute items among store names
 document.addEventListener(
   "DOMContentLoaded",
-  refreshCarts
+    function() {
+      // do whatever you like here
+      refreshCarts()
+      
+    
+    
+    
+  }
   ,
   false
 );
@@ -157,35 +194,5 @@ function addItemToDoc(item) {
   console.log(macys_div.innerHTML)
 }
 
-function refreshCarts() {
-    carts = getCarts()
-    console.log(carts.carts)
 
 
-
-    var macys_div = document.getElementById("all-carts")
-    macys_div.innerHTML = ""
-    Object.values(carts.carts).forEach(item => addItemToDoc(item))
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function () {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.display === "block") {
-          panel.style.display = "none";
-        } else {
-          panel.style.display = "block";
-        }
-      });
-    }
-}
-
-function yourFunction(){
-  // do whatever you like here
-
-  setTimeout(refreshCarts(), 1000);
-}
-
-yourFunction();

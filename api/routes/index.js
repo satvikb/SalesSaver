@@ -243,8 +243,8 @@ router.get("/orders/:userId", function (req, res, next) {
 router.post("/checkout", function (req, res, next) {
   var userID = req.body.userId;
   var itemIDs = req.body.items;
-  console.log(JSON.stringify(req.body)+" "+itemIDs);
-
+  console.log(JSON.stringify(req.body));
+  
   var user = users[userID]; //users[key] lol
 
   var itemsRemoved = []
