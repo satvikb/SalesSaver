@@ -37,6 +37,8 @@ var itemNames = [
   "Gray Shorts",
   "Yellow Jacket",
 ];
+
+var itemPrices = [29.99, 79.99, 53.99, 119.99, 399.99, 24.99, 8.99, 16.99, 229.99, 21.99, 64.99, 74.99, 24.99, 19.99, 29.99]
 var imageURLs = [
   "https://i.imgur.com/cfroVp9.png",
   "https://i.imgur.com/Gn08n71.jpg",
@@ -87,7 +89,7 @@ for (var i = 0; i < 3; i++) {
     var item = itemObject(
       itemId,
       itemNames[i * 5 + j],
-      getRandomInt(20) + 10 - 0.01,
+      itemPrices[i * 5 + j],
       imageURLs[itemId],
       storeId,
       true
@@ -138,8 +140,8 @@ function itemObject(itemId, name, price, pictureURL, cartId, isStocked) {
   };
 }
 
-function cartObject(cartId, items, pfpURL) {
-  return { id: cartId, items: items, pfpURL: pfpURL};
+function cartObject(cartId, items, pfpURL, storeName) {
+  return { id: cartId, items: items, pfpURL: pfpURL, storeName: storeName};
 }
 
 function userObject(userId, carts, orders, promotions) {
@@ -157,7 +159,7 @@ function promotionObject(promotionId, cartId, description, expiryDate) {
 
 var carts = {};
 for (var i = 0; i < 3; i++) {
-  carts[storeIDs[i]] = cartObject(storeIDs[i], [], storePfpURLs[i]);
+  carts[storeIDs[i]] = cartObject(storeIDs[i], [], storePfpURLs[i], storeNames[i]);
 }
 
 var orders = [];
