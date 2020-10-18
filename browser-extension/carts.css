@@ -16,13 +16,58 @@
   background-color: #ccc;
 }
 
+.accordion-content {
+  background-color: #69be28;
+  padding: 5px 8px;
+  width: 85%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 20px 40px 1fr 100px;
+  grid-template-areas:
+    "select pic name buy"
+    "select pic price buy";
+  align-items: center;
+}
+
+.item-select {
+  grid-area: select;
+}
+
+.item-icon {
+  grid-area: pic;
+  background-color: grey;
+  margin: 10px 2px;
+}
+
 .panel {
-  padding: 0 18px;
+  /* padding: 0 -20px 0 0; */
   display: none;
-  background-color: white;
-  overflow: hidden;
+  /* background-color: rgb(58, 56, 56); */
+  /* background-color: aquamarine; */
+  /* overflow: hidden; */
 }
 .tab-text {
-    /* width: 500px; */
-    background-color: green;
+  grid-area: name;
+  /* width: 50%; */
+  /* background-color: green; */
+}
+
+.item-price {
+  grid-area: price;
+  background-color: green;
+}
+
+.buy-now-button {
+  grid-area: buy;
+  /* position: absolute; */
+  width: 97px;
+  height: 40px;
+  /* left: 336px;
+  top: 17px; */
+  /* margin-left: -20px; */
+
+  /* UI / Blue */
+
+  background: #2e7df7;
+  border-radius: 8px;
 }
