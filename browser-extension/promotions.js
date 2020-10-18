@@ -1,6 +1,8 @@
 document.addEventListener(
     "DOMContentLoaded",
     function () {
+
+      
       var promos = {
         "promotions": [
           {
